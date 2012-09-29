@@ -25,20 +25,26 @@ if (!RunningInNode()) {
 	this.Tautologistics.NodeHtmlParser.Tests.push(exports);
 }
 
-exports.name = "Unescaped >";
+exports.name = "Unescaped '>'";
 exports.options = {
 	  handler: {}
-	, parser: { includeLocation: true }
+	, parser: {}
 };
 exports.html = '<a title="Ex: Expres (Krakow Glowny >> Praha hl.n.)">Ex 402 Silesia</a>​';
 exports.expected = [
 	{
-		raw: 'a',
-		data: 'a',
+		raw: 'a title="Ex: Expres (Krakow Glowny >> Praha hl.n.)"',
+		data: 'a title="Ex: Expres (Krakow Glowny >> Praha hl.n.)"',
 		type: 'tag',
 		name: 'a',
-		attribs: { title: 'Ex: Expres (Krakow Glowny >> Praha hl.n.)' }
-	}
+		attribs: { title: 'Ex: Expres (Krakow Glowny >> Praha hl.n.)' },
+		children: [ {
+			raw: 'Ex 402 Silesia',
+			data: 'Ex 402 Silesia',
+			type: 'text'
+		} ]
+	},
+  { raw: '​', data: '​', type: 'text' }
 	];
 
 })();
